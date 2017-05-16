@@ -46,11 +46,29 @@ def verbing(s):
 # # Return the resulting string.
 # # So 'This dinner is not that bad!' yields:
 # # This dinner is good!
-# def not_bad(s):
-#   # +++your code here+++
 
 
+def not_bad(s):
+    """ replaces any instance of "not .... bad" in string with "good" """
+    # initialize search variables for phrase "not .... bad"
+    word_start = "not"
+    word_end = "bad"
+    index_word_start = s.find(word_start)
+    index_word_end = s.find(word_end)
 
+    # test for conditional that not comes before bad for string replacement
+    # added flexiblity to allow inclusion of trailing statements (new_string_trailing)
+    if index_word_start < index_word_end:
+        new_string_prefix = s[0:index_word_start]
+        new_string_trailing = s[index_word_end + len(word_end):]
+        new_string = new_string_prefix + "good" + new_string_trailing
+    else:
+        new_string = s
+
+    return (new_string)
+
+
+#
 # # F. front_back
 # # Consider dividing a string into two halves.
 # # If the length is even, the front and back halves are the same length.
@@ -82,12 +100,13 @@ def main():
     test(verbing('swiming'), 'swimingly')
     test(verbing('do'), 'do')
 
-#   # print
-#   # print 'not_bad'
-#   # test(not_bad('This movie is not so bad'), 'This movie is good')
-#   # test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
-#   # test(not_bad('This tea is not hot'), 'This tea is not hot')
-#   # test(not_bad("It's bad yet not"), "It's bad yet not")
+    print ()
+    print ('not_bad')
+    # modified test to make more complex
+    test(not_bad('This movie is not so bad you know'), 'This movie is good you know')
+    test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
+    test(not_bad('This tea is not hot'), 'This tea is not hot')
+    test(not_bad("It's bad yet not"), "It's bad yet not")
 
 #   # print
 #   # print 'front_back'
