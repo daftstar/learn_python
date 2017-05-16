@@ -58,6 +58,7 @@ def not_bad(s):
 
     # test for conditional that not comes before bad for string replacement
     # added flexiblity to allow inclusion of trailing statements (new_string_trailing)
+    # initialize logic variables only if condition is met
     if index_word_start < index_word_end:
         new_string_prefix = s[0:index_word_start]
         new_string_trailing = s[index_word_end + len(word_end):]
@@ -70,15 +71,39 @@ def not_bad(s):
 
 #
 # # F. front_back
-# # Consider dividing a string into two halves.
-# # If the length is even, the front and back halves are the same length.
-# # If the length is odd, we'll say that the extra char goes in the front half.
-# # e.g. 'abcde', the front half is 'abc', the back half 'de'.
-# # Given 2 strings, a and b, return a string of the form
-# #  a-front + b-front + a-back + b-back
-# def front_back(a, b):
-#   # +++your code here+++
 
+def front_back(a, b):
+    # note: this entire function should be simplified - too much repetition
+    # possibly use *args in place of a,b for simplification and flexibility
+    """ Dvide a string into two halves.
+    If the length is even, the front and back halves are the same length.
+    If the length is odd, we'll say that the extra char goes in the front half.
+    e.g. 'abcde', the front half is 'abc', the back half 'de'.
+    Given 2 strings, a and b, return a string of the form
+    a-front + b-front + a-back + b-back """
+
+    # define index values for halfway points
+    a_half_len = int(len(a) / 2)
+    b_half_len = int(len(b) / 2)
+
+    # logic for string a
+    if len(a) % 2 == 0:
+        a_front = a[0:a_half_len]
+        a_back = a[a_half_len:]
+    else:
+        a_front = a[0:a_half_len + 1]
+        a_back = a[a_half_len + 1:]
+
+    # logic for string b
+    if len(b) % 2 == 0:
+        b_front = b[0:b_half_len]
+        b_back = b[b_half_len:]
+    else:
+        b_front = b[0:b_half_len + 1]
+        b_back = b[b_half_len + 1:]
+
+    new_string = a_front + b_front + a_back + b_back
+    return (new_string)
 
 
 # Provided simple test() function used in main() to print
@@ -108,11 +133,11 @@ def main():
     test(not_bad('This tea is not hot'), 'This tea is not hot')
     test(not_bad("It's bad yet not"), "It's bad yet not")
 
-#   # print
-#   # print 'front_back'
-#   # test(front_back('abcd', 'xy'), 'abxcdy')
-#   # test(front_back('abcde', 'xyz'), 'abcxydez')
-#   # test(front_back('Kitten', 'Donut'), 'KitDontenut')
+    print ()
+    print ('front_back')
+    test(front_back('abcd', 'xy'), 'abxcdy')
+    test(front_back('abcde', 'xyz'), 'abcxydez')
+    test(front_back('Kitten', 'Donut'), 'KitDontenut')
 
 
 if __name__ == '__main__':
