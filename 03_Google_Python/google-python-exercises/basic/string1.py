@@ -64,36 +64,32 @@ def both_ends(s):
 #  Using raw python without any built-in replace functions
 
 
-def fix_start(s):
-    """ function that replaces the all occurences of the first letter of s with '*' """
-    # get first letter of string
-    first_char = s[0]
+# def fix_start(s):
+#     """ function that replaces the all occurences of the first letter of s with '*' """
+#     # get first letter of string
+#     first_char = s[0]
 
-    # initialize variable new string with first letter of param.
-    new_string = s[0]
+#     # initialize variable new string with first letter of param.
+#     new_string = s[0]
 
-    # begin at index 1 since we've already populated index 0 of new string with var first_char
-    for char in s[1:]:
-        if char == first_char:
-            new_string += "*"
-        else:
-            new_string += char
+#     # begin at index 1 since we've already populated index 0 of new string with var first_char
+#     for char in s[1:]:
+#         if char == first_char:
+#             new_string += "*"
+#         else:
+#             new_string += char
 
-    return (new_string)
+#     return (new_string)
 
 
 # VERSION B:
 #  Using python's built-in replace function
 
-def fix_start_b(s):
+def fix_start(s):
     first_char = s[0]
     replacement = s[1:].replace(first_char, "*")
     new_string = first_char + replacement
     return (new_string)
-
-print (fix_start_b("babble"))
-
-# print (fix_start("babble"))
 
 
 # # D. MixUp
@@ -102,10 +98,16 @@ print (fix_start_b("babble"))
 # # e.g.
 # #   'mix', pod' -> 'pox mid'
 # #   'dog', 'dinner' -> 'dig donner'
-# # Assume a and b are length 2 or more.
-# def mix_up(a, b):
-#   # +++your code here+++
-#   return
+# Assume a and b are length 2 or more.
+def mix_up(a, b):
+    word_one_prefix = a[0:2]
+    word_one_suffix = a[2:]
+    word_two_prefix = b[0:2]
+    word_two_suffix = b[2:]
+
+    new_word = word_two_prefix + word_one_suffix + " " + word_one_prefix + word_two_suffix
+ 
+    return (new_word)
 
 
 # Provided simple test() function used in main() to print
@@ -144,12 +146,12 @@ def main():
     test(fix_start('google'), 'goo*le')
     test(fix_start('donut'), 'donut')
 
-#   print
-#   print 'mix_up'
-#   test(mix_up('mix', 'pod'), 'pox mid')
-#   test(mix_up('dog', 'dinner'), 'dig donner')
-#   test(mix_up('gnash', 'sport'), 'spash gnort')
-#   test(mix_up('pezzy', 'firm'), 'fizzy perm')
+    print ()
+    print ('mix_up')
+    test(mix_up('mix', 'pod'), 'pox mid')
+    test(mix_up('dog', 'dinner'), 'dig donner')
+    test(mix_up('gnash', 'sport'), 'spash gnort')
+    test(mix_up('pezzy', 'firm'), 'fizzy perm')
 
 
 # Standard boilerplate to call the main() function.
