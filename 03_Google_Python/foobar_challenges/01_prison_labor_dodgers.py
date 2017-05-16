@@ -64,14 +64,18 @@ y = [2, 4, -4, 3, 1, 1, 14, 27, 50]
 def answer(x, y):
     """ compares values of x against y
     and vice versa to find the unique value """
+    # this solution only works for the last unique value found
+    # use list comprehension to store multiple unique values
 
-    z = sorted(x + y)
+    # create a single list to look for unique values
+    z = (x + y)
+
+    # assumes that "unique" = 1 instance of a value
     for i in z:
         if z.count(i) % 2 != 0:
             new_value = i
 
     return (new_value)
-
 
 print (answer(x, y))
 
@@ -82,21 +86,19 @@ print (answer(x, y))
 # http://www.pythontutor.com/live.html#mode=edit
 # ##################################################
 
-def answer(x, y):
-    """ compares values of x against y
-    and vice versa to find the unique value """
-    for i in y:
-        if i not in x:
-            abnormal_value = i
-        else:
-            for i in x:
-                if i not in y:
-                    abnormal_value = i
+# def answer(x, y):
+#     """ compares values of x against y
+#     and vice versa to find the unique value """
+#     for i in y:
+#         if i not in x:
+#             abnormal_value = i
+#         else:
+#             for i in x:
+#                 if i not in y:
+#                     abnormal_value = i
 
-    return (abnormal_value)
+#     return (abnormal_value)
 
-
-print (answer(x, y))
 
 
 
