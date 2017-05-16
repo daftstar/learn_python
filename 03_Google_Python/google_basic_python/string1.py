@@ -16,13 +16,14 @@
 # are some additional functions to try in string2.py.
 
 # A. donuts
-# Given an int count of a number of donuts, return a string
-# of the form 'Number of donuts: <count>', where <count> is the number
-# passed in. However, if the count is 10 or more, then use the word 'many'
-# instead of the actual count.
-# So donuts(5) returns 'Number of donuts: 5'
-# and donuts(23) returns 'Number of donuts: many'
+
 def donuts(count):
+    """ Given an int count of a number of donuts, return a string
+    of the form 'Number of donuts: <count>', where <count> is the number
+    passed in. However, if the count is 10 or more, then use the word 'many'
+    instead of the actual count.  So donuts(5) returns
+    'Number of donuts: 5'and donuts(23) returns
+    'Number of donuts: many' """
     phrase = ""
     if count >= 10:
         phrase = "Number of donuts: many"
@@ -34,11 +35,13 @@ def donuts(count):
 
 
 # # B. both_ends
-# # Given a string s, return a string made of the first 2
-# # and the last 2 chars of the original string,
-# # so 'spring' yields 'spng'. However, if the string length
-# # is less than 2, return instead the empty string.
+
 def both_ends(s):
+    """ Given a string s, return a string made of the first 2
+        and the last 2 chars of the original string,
+        so 'spring' yields 'spng'. However, if the string length
+        is less than 2, return instead the empty string. """
+
     if len(s) > 2:
         new_string = s[0:2] + s[-2:]
         return (new_string)
@@ -51,11 +54,7 @@ def both_ends(s):
 
 
 # # C. fix_start
-# # Given a string s, return a string
-# # where all occurences of its first char have
-# # been changed to '*', except do not change
-# # the first char itself.
-# # e.g. 'babble' yields 'ba**le'
+
 # # Assume that the string is length 1 or more.
 # # Hint: s.replace(stra, strb) returns a version of string s
 # # where all instances of stra have been replaced by strb.
@@ -86,6 +85,12 @@ def both_ends(s):
 #  Using python's built-in replace function
 
 def fix_start(s):
+    """ Given a string s, return a string where all occurences
+    of its first char have been changed to '*', except
+    do not change the first char itself.
+    e.g. 'babble' yields 'ba**le' 
+    string length > 1 """
+
     first_char = s[0]
     replacement = s[1:].replace(first_char, "*")
     new_string = first_char + replacement
@@ -93,13 +98,14 @@ def fix_start(s):
 
 
 # # D. MixUp
-# # Given strings a and b, return a single string with a and b separated
-# # by a space '<a> <b>', except swap the first 2 chars of each string.
-# # e.g.
-# #   'mix', pod' -> 'pox mid'
-# #   'dog', 'dinner' -> 'dig donner'
-# Assume a and b are length 2 or more.
+
 def mix_up(a, b):
+
+    """ Given strings a and b, return a single string with a and b separated
+    by a space '<a> <b>', except swap the first 2 chars of each string.
+        e.g. 'mix', pod' -> 'pox mid'
+             'dog', 'dinner' -> 'dig donner'
+    Assume a and b are length 2 or more. """
     word_one_prefix = a[0:2]
     word_one_suffix = a[2:]
     word_two_prefix = b[0:2]
