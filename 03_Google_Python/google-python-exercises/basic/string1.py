@@ -15,7 +15,6 @@
 # It's ok if you do not complete all the functions, and there
 # are some additional functions to try in string2.py.
 
-
 # A. donuts
 # Given an int count of a number of donuts, return a string
 # of the form 'Number of donuts: <count>', where <count> is the number
@@ -31,15 +30,24 @@ def donuts(count):
         phrase = "Number of donuts: %s" % count
     return (phrase)
 
+# ####################################################
+
 
 # # B. both_ends
 # # Given a string s, return a string made of the first 2
 # # and the last 2 chars of the original string,
 # # so 'spring' yields 'spng'. However, if the string length
 # # is less than 2, return instead the empty string.
-# def both_ends(s):
-#   # +++your code here+++
-#   return
+def both_ends(s):
+    if len(s) > 2:
+        new_string = s[0:2] + s[-2:]
+        return (new_string)
+    else:
+        return ""
+# ####################################################
+
+
+# ####################################################
 
 
 # # C. fix_start
@@ -51,9 +59,41 @@ def donuts(count):
 # # Assume that the string is length 1 or more.
 # # Hint: s.replace(stra, strb) returns a version of string s
 # # where all instances of stra have been replaced by strb.
-# def fix_start(s):
-#   # +++your code here+++
-#   return
+#
+# VERSION A:
+#  Using raw python without any built-in replace functions
+
+
+def fix_start(s):
+    """ function that replaces the all occurences of the first letter of s with '*' """
+    # get first letter of string
+    first_char = s[0]
+
+    # initialize variable new string with first letter of param.
+    new_string = s[0]
+
+    # begin at index 1 since we've already populated index 0 of new string with var first_char
+    for char in s[1:]:
+        if char == first_char:
+            new_string += "*"
+        else:
+            new_string += char
+
+    return (new_string)
+
+
+# VERSION B:
+#  Using python's built-in replace function
+
+def fix_start_b(s):
+    first_char = s[0]
+    replacement = s[1:].replace(first_char, "*")
+    new_string = first_char + replacement
+    return (new_string)
+
+print (fix_start_b("babble"))
+
+# print (fix_start("babble"))
 
 
 # # D. MixUp
@@ -70,12 +110,12 @@ def donuts(count):
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
+# fixed test case to be more descriptive.print ('%s got: %s expected: %s' % (prefix, repr(got), repr(expected)))
 def test(got, expected):
-  if got == expected:
-    prefix = ' OK '
-    print (prefix)
-  else:
-    prefix = '  X '
+    if got == expected:
+        prefix = ' PASSED - '
+    else:
+        prefix = '        X '
     print ('%s got: %s expected: %s' % (prefix, repr(got), repr(expected)))
 
 
@@ -89,20 +129,20 @@ def main():
     test(donuts(10), 'Number of donuts: many')
     test(donuts(99), 'Number of donuts: many')
 
-#   print
-#   print 'both_ends'
-#   test(both_ends('spring'), 'spng')
-#   test(both_ends('Hello'), 'Helo')
-#   test(both_ends('a'), '')
-#   test(both_ends('xyz'), 'xyyz')
+    print ()
+    print ('both_ends')
+    test(both_ends('spring'), 'spng')
+    test(both_ends('Hello'), 'Helo')
+    test(both_ends('a'), '')
+    test(both_ends('xyz'), 'xyyz')
 
   
-#   print
-#   print 'fix_start'
-#   test(fix_start('babble'), 'ba**le')
-#   test(fix_start('aardvark'), 'a*rdv*rk')
-#   test(fix_start('google'), 'goo*le')
-#   test(fix_start('donut'), 'donut')
+    print ()
+    print ('fix_start')
+    test(fix_start('babble'), 'ba**le')
+    test(fix_start('aardvark'), 'a*rdv*rk')
+    test(fix_start('google'), 'goo*le')
+    test(fix_start('donut'), 'donut')
 
 #   print
 #   print 'mix_up'
