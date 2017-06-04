@@ -9,12 +9,13 @@
 
 """
 # ########################################################
-# INSTRUCTIONS
+# PROBLEM & INSTRUCTIONS
 # ########################################################
 
 # PROBLEM:
-# algorithm 
+# algorithm gets into an infinite loop, based on starting n
 
+# INSTRUCTIONS
 # 1) Start with a random minion ID n,
 #    which is a nonnegative integer of length k in base b
 
@@ -52,14 +53,15 @@
 # b = 10 # base 10
 
 
+# DONE IN BASE 10
 
-def answer(n):
-    
+def answer(n, b):
+
     count = 0
     last_value = 0
 
     # y_array = []  # not needed since we can perform operation on x_array
-    while n != last_value:
+    while n != last_value and count < 20000:
         print ("original value n:", n)
         k = len(str(n))
         string_x = ""
@@ -79,9 +81,13 @@ def answer(n):
         for i in y_array_sorted:
             string_y += i
 
-        x = int(string_x)
-        y = int(string_y)
+        x = int(string_x, base=b)
+        y = int(string_y, base=b)
         z = x - y
+
+        # print ("x is:", x)
+        # print ("y is:", y)
+        # print ("z is:", z)
 
         string_z = str(z).zfill(k)
 
@@ -90,12 +96,25 @@ def answer(n):
         count += 1
         print ("     new value n:", n)
         print ("repetition:", n == last_value)
-        print ("total count: ", count)
+        # print ("total count: ", count)
         print ("\n____________________________\n")
-        # return("")
+
+        value_10 = int((len(str(count))))
+        print (count)
+
+        # print ("in base 10:", value_10)
+
+
+    count = int(str(value_10), base=b)
+    return count
 
 
 
 # n = 134833  # infinite loop
-n = 320
-print (answer(n))
+n = 673737
+b = 10
+print (answer(n, b))
+
+
+
+
