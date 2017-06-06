@@ -129,6 +129,24 @@ for i in range(len(s)):
 print ("Longest substring in alphabetical order is: %s" % longest_string)
 """
 
+# ########################
 
+# Code without comments / doing it the janky way by setting static vars globally:
 
+"""
+s = "kjshduihwnsdmnzclkjwabcsddeegoppzsdfkljhsdfiul"
+string = s[0]
+longest_string = s[0]
 
+for i in range(1, len(s)):
+    if string[-1] <= s[i]:
+        string += s[i]
+    else:
+        string = s[i]
+
+    if len(string) > len(longest_string):
+        longest_string = string
+
+print ("Longest substring in alphabetical order is: %s" % longest_string)
+
+"""
