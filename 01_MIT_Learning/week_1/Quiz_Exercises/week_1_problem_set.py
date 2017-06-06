@@ -80,7 +80,8 @@ s = 'zyxwvutsrqponmlkjihgfedcba'
 string = ""
 longest_string = ""
 
-
+# use range to set i as the counter. We can use i to define
+# which character we're evaluating.
 for i in range(len(s)):
     # we could push the below to global variables, but seems sloppy
     # at beginning of counter, set values for comparison strings
@@ -106,3 +107,28 @@ for i in range(len(s)):
         longest_string = string
 
 print ("Longest substring in alphabetical order is: %s" % longest_string)
+
+# Code without comments:
+"""
+s = "kjshduihwnsdmnzclkjwabcsddeegoppzsdfkljhsdfiul"
+string = ""
+longest_string = ""
+
+for i in range(len(s)):
+    if i == 0:
+        string = s[0]
+        longest_string = s[0]
+    elif string[-1] <= s[i]:
+        string += s[i]
+    else:
+        string = s[i]
+
+    if len(string) > len(longest_string):
+        longest_string = string
+
+print ("Longest substring in alphabetical order is: %s" % longest_string)
+"""
+
+
+
+
