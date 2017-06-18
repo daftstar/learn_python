@@ -16,7 +16,7 @@ def iterPower(base, exp):
     return (value)
 
 
-print (iterPower(3, 4))
+# print (iterPower(3, 4))
 
 
 # Recursion Example
@@ -39,4 +39,5 @@ def recurPower(base, exp):
     else:
         return (base * recurPower(base, (exp - 1)))
 
-print (recurPower(3, 5))
+
+print (recurPower(3, 4))
