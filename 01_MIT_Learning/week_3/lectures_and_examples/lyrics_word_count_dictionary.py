@@ -53,11 +53,6 @@ def most_common_words(freqs):
 
 
 song = (lyrics_to_frequencies(under_the_pressure_list))
-
-
-
-# print (song)
-
 (word, count) = most_common_words(song)
 print (word, count)
 
