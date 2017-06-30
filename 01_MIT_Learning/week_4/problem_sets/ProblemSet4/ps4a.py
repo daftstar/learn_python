@@ -78,10 +78,10 @@ def getFrequencyDict(sequence):
 
 
 # (end of helper code)
-# -----------------------------------
+# -----------------------------------------------------------------
 
 
-#
+# ############ PROBLEM 1 ##################
 # Problem #1: Scoring a word
 #
 def getWordScore(word, n):
@@ -99,12 +99,25 @@ def getWordScore(word, n):
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    score = 0
+    for i in range(len(word)):
+        # match user's letter to value of letter in dictionary, calculate score
+        score += SCRABBLE_LETTER_VALUES[word[i]]
+        # print ("letter: %s - %s" %(word[i], SCRABBLE_LETTER_VALUES[word[i]]))
+
+    # After individual letter score has been tallie
+    score *= len(word)
+
+    # If word uses all available letters, add 50 points to score
+    if len(word) == n:
+        score += 50
+    return (score)
 
 
-#
+print (getWordScore("qi", 5))
+
+# ############ PROBLEM 2 ##################
 # Problem #2: Make sure you understand how this function works and what it does!
-#
 def displayHand(hand):
     """
     Displays the letters currently in the hand.
@@ -115,7 +128,7 @@ def displayHand(hand):
        a x x l l l e
     The order of the letters is unimportant.
 
-    hand: dictionary (string -> int)
+    hand: Dictionary {string:int}
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
@@ -152,9 +165,18 @@ def dealHand(n):
 
     return hand
 
-#
+# print (dealHand(7))
 # Problem #2: Update a hand by removing letters
 #
+
+
+
+
+
+
+
+
+
 
 
 def updateHand(hand, word):
@@ -173,6 +195,39 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)
     returns: dictionary (string -> int)
     """
+    # created a copy of the dictionary, as to keep the original intact.
+    updated_hand = hand.copy()
+    
+    # check to see if each letter in the word is available in
+    # the copied hand. If so, reduce updated_hand[value] by 1.
+    for letter in word:
+        if letter in updated_hand and updated_hand[letter] > 0:
+            updated_hand[letter] -= 1
+
+    return updated_hand
+
+
+
+
+
+
+temp = {'a':1, 'q':1, 'l':2, 'm':1, 'u':1, 'i':1}
+hand = updateHand(temp, "quail")
+print (hand)
+print (displayHand(hand))
+
+
+
+
+
+
+
+
+
+
+
+
+
     # TO DO ... <-- Remove this comment when you code this function
 
 #
