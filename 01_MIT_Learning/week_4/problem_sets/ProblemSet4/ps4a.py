@@ -119,8 +119,8 @@ def getWordScore(word, n):
     return (score)
 
 
-print (getWordScore("qi", 5))
-print (newline())
+# print (getWordScore("qi", 5))
+# print (newline())
 
 
 # ############ PROBLEM 2 ##################
@@ -137,10 +137,17 @@ def displayHand(hand):
 
     hand: Dictionary {string:int}
     """
-    for letter in hand.keys():
-        for j in range(hand[letter]):
-            print(letter, end=" ")    # print all on the same line
-    print()                             # print an empty line
+    hand_spelling = ""
+    for key, value in hand.items():
+        hand_spelling += (key + " ") * value
+
+    return hand_spelling
+
+
+    # for letter in hand.keys():
+    #     for j in range(hand[letter]):
+    #         print(letter, end=" ")    # print all on the same line
+    # print()                             # print an empty line
 
 
 def dealHand(n):
@@ -196,16 +203,15 @@ def updateHand(hand, word):
             updated_hand[letter] -= 1
         else:
             return False
-    # print (word)        
     return updated_hand
 
 
-hand = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
+# hand = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
 
-up_hand = updateHand(hand, "quail")
-print (up_hand)
-print (displayHand(up_hand))
-print (newline())
+# up_hand = updateHand(hand, "quail")
+# print (up_hand)
+# print (displayHand(up_hand))
+# print (newline())
 
 
 #
@@ -235,24 +241,23 @@ def isValidWord(word, hand, wordList):
 
     for char in word:
         if word_freq[char] > hand.get(char, 0):
-            print ("in word %s, %s does not exist enough times in hand: \n%s" %(word, char, hand))
+            # print ("in word %s, %s does not exist enough times in hand: \n%s" %(word, char, hand))
             return False
 
     # If the function makes it this far, then evaluate
     # if the word exists in the wordList       
     return (word in wordList)
 
+wordList = loadWords()
 
-w_list = loadWords()
 
+# print (isValidWord("kwijibo", {'k': 1, 'j': 1, 'b': 1, 'w': 1, 'i': 2, 'o': 1}, wordList))
+# print (isValidWord("chayote", {'c': 2, 'y': 1, 'h': 1, 't': 2, 'z': 1, 'u': 2, 'a': 1, 'o': 2}, wordList))
+# print (isValidWord("hammer", {'r': 1, 'a': 1, 'e': 1, 'm': 2, 'h': 1}, wordList))
+# print (isValidWord("hammer", {'r': 1, 'a': 1, 'e': 1, 'm': 2, 'h': 1}, wordList))
+# print (isValidWord("rapture", {'a': 3, 'r': 1, 't': 1, 'p': 2, 'e': 1, 'u': 1}, wordList))
 
-print (isValidWord("kwijibo", {'k': 1, 'j': 1, 'b': 1, 'w': 1, 'i': 2, 'o': 1}, w_list))
-print (isValidWord("chayote", {'c': 2, 'y': 1, 'h': 1, 't': 2, 'z': 1, 'u': 2, 'a': 1, 'o': 2}, w_list))
-print (isValidWord("hammer", {'r': 1, 'a': 1, 'e': 1, 'm': 2, 'h': 1}, w_list))
-print (isValidWord("hammer", {'r': 1, 'a': 1, 'e': 1, 'm': 2, 'h': 1}, w_list))
-print ( isValidWord("rapture", {'a': 3, 'r': 1, 't': 1, 'p': 2, 'e': 1, 'u': 1}, w_list))
-
-print (newline())
+# print (newline())
 
 #
 # Problem #4: Playing a hand
@@ -271,9 +276,10 @@ def calculateHandlen(hand):
     return length
 
 
-hand = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
-print (calculateHandlen(hand))
-
+# hand = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
+# print (calculateHandlen(hand))
+# print (newline())
+# print (newline())
 
 
 
@@ -299,34 +305,66 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
+    # Current status of hand
+    current_hand_display = displayHand(hand)
+
+    # Keep track of the word score
+    word_score = 0
+
     # Keep track of the total score
-    
-    # As long as there are still letters left in the hand:
-    
+    total_score = 0
+
+    # keep track of how many letters are in the hand
+    hand_length = calculateHandlen(hand)
+
+    # As long as there are still letters left in the hand: 
+    while hand_length > 0:
+
         # Display the hand
-        
+        print ("Current Hand:  %s" % current_hand_display)
+
         # Ask user for input
-        
+        # user_input = "him"
+        user_input = input("Enter word, or a \".\" to indicate that you are finished: ")
+        # print (user_input)
+
         # If the input is a single period:
-        
+        if user_input == ".":
+
             # End the game (break out of the loop)
+            break
 
-            
         # Otherwise (the input is not a single period):
-        
-            # If the word is not valid:
-            
-                # Reject invalid word (print a message followed by a blank line)
+        # If the word is not valid:
+        if isValidWord(user_input, hand, wordList) is False:
+            # Reject invalid word (print a message followed by a blank line)
+            print ("Invalid word, please try again.\n")
 
-            # Otherwise (the word is valid):
+        # Otherwise (the word is valid):
+        else:
+            # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
+            word_score = getWordScore(user_input, n)
+            total_score += word_score
+            print ("\"%s\" earned %s points. Total: %s points\n" % (user_input, word_score, total_score))
 
-                # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
-                
-                # Update the hand 
-                
+            # Update the hand
+            current_hand = updateHand(hand, user_input)
+            hand = current_hand
+
+            current_hand_display = displayHand(current_hand)
+            hand_length = calculateHandlen(current_hand)
+            # print (hand_length)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    print ("Run out of letters. Total score: 46 points.")
+
+
+hand = {'h': 1, 'i': 1, 'c': 1, 'z': 1, 'm': 2, 'a': 1}
+n = 7
+print (playHand(hand, wordList, n))
+print (newline())
+
+
 
 
 #
