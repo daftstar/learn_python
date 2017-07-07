@@ -91,11 +91,11 @@ def is_list_permutation(L1, L2):
 # L1 = ["hello", 1, 1, 1, 'b', 'c', 'c']
 # L2 = [1, 1, 1, 'c', 'c', 'b', "heddllo"]
 
-L1 = [1, 1, 1, 'b', 'c', 'c']
-L2 = [1, 1, 1, 'c', 'c', 'b']
+# L1 = [1, 1, 1, 'b', 'c', 'c']
+# L2 = [1, 1, 1, 'c', 'c', 'b']
 
-# L1 = [1, 1, 1, 'b', 'c', 'c', "hey", "hey", "hey", "hey"]
-# L2 = ["hey", "hey", "hey", "hey", 1, 1, 1, 'c', 'c', 'b']
+L1 = [1, 1, 1, 'b', 'c', 'c', "hey", "hey", "hey", "hey"]
+L2 = ["hey", "hey", "hey", "hey", 1, 1, 1, 'c', 'c', 'b']
 
 # L1 = ['a', 'a', 'b']
 # L2 = ['a', 'b']
