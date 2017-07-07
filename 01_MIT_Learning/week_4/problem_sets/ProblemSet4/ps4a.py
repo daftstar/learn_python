@@ -137,17 +137,17 @@ def displayHand(hand):
 
     hand: Dictionary {string:int}
     """
-    hand_spelling = ""
-    for key, value in hand.items():
-        hand_spelling += (key + " ") * value
+    # hand_spelling = ""
+    # for key, value in hand.items():
+    #     hand_spelling += (key + " ") * value
 
-    return hand_spelling
+    # return hand_spelling
 
 
-    # for letter in hand.keys():
-    #     for j in range(hand[letter]):
-    #         print(letter, end=" ")    # print all on the same line
-    # print()                             # print an empty line
+    for letter in hand.keys():
+        for j in range(hand[letter]):
+            print(letter, end=" ")    # print all on the same line
+    print()                             # print an empty line
 
 
 def dealHand(n):
@@ -305,9 +305,6 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # Current status of hand
-    current_hand_display = displayHand(hand)
-
     # Keep track of the word score
     word_score = 0
 
@@ -321,12 +318,11 @@ def playHand(hand, wordList, n):
     while hand_length > 0:
 
         # Display the hand
-        print ("Current Hand:  %s" % current_hand_display)
+        print ("Current Hand:  ", end ='')
+        displayHand(hand)
 
         # Ask user for input
-        # user_input = "him"
         user_input = input("Enter word, or a \".\" to indicate that you are finished: ")
-        # print (user_input)
 
         # If the input is a single period:
         if user_input == ".":
@@ -351,7 +347,6 @@ def playHand(hand, wordList, n):
             current_hand = updateHand(hand, user_input)
             hand = current_hand
 
-            current_hand_display = displayHand(current_hand)
             hand_length = calculateHandlen(current_hand)
             # print (hand_length)
 
@@ -359,9 +354,9 @@ def playHand(hand, wordList, n):
     return ("Goodbye! Total score: %s points." % total_score)
 
 
-# hand = {'h': 1, 'i': 1, 'c': 1, 'z': 1, 'm': 2, 'a': 1}
+hand = {'h': 1, 'i': 1, 'c': 1, 'z': 1, 'm': 2, 'a': 1}
 # hand = {'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}
-hand = {'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}
+# hand = {'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}
 n = 7
 print (playHand(hand, wordList, n))
 print (newline())
