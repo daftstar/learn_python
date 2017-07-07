@@ -43,6 +43,11 @@ SCRABBLE_LETTER_VALUES = {
 WORDLIST_FILENAME = "words.txt"
 
 
+
+def newline():
+    print ("\n_________________________________\n")
+
+
 def loadWords():
     """
     Returns a list of valid words. Words are strings of lowercase letters.
@@ -115,6 +120,8 @@ def getWordScore(word, n):
 
 
 print (getWordScore("qi", 5))
+print (newline())
+
 
 # ############ PROBLEM 2 ##################
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -132,12 +139,8 @@ def displayHand(hand):
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
-            print(letter, end=" ")       # print all on the same line
+            print(letter, end=" ")    # print all on the same line
     print()                             # print an empty line
-
-#
-# Problem #2: Make sure you understand how this function works and what it does!
-#
 
 
 def dealHand(n):
@@ -165,18 +168,6 @@ def dealHand(n):
 
     return hand
 
-# print (dealHand(7))
-# Problem #2: Update a hand by removing letters
-#
-
-
-
-
-
-
-
-
-
 
 
 def updateHand(hand, word):
@@ -197,38 +188,25 @@ def updateHand(hand, word):
     """
     # created a copy of the dictionary, as to keep the original intact.
     updated_hand = hand.copy()
-    
+
     # check to see if each letter in the word is available in
     # the copied hand. If so, reduce updated_hand[value] by 1.
     for letter in word:
         if letter in updated_hand and updated_hand[letter] > 0:
             updated_hand[letter] -= 1
-
+        else:
+            return False
+    # print (word)        
     return updated_hand
 
 
+hand = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
 
+up_hand = updateHand(hand, "quail")
+print (up_hand)
+print (displayHand(up_hand))
+print (newline())
 
-
-
-temp = {'a':1, 'q':1, 'l':2, 'm':1, 'u':1, 'i':1}
-hand = updateHand(temp, "quail")
-print (hand)
-print (displayHand(hand))
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # TO DO ... <-- Remove this comment when you code this function
 
 #
 # Problem #3: Test word validity
@@ -241,13 +219,40 @@ def isValidWord(word, hand, wordList):
     composed of letters in the hand. Otherwise, returns False.
 
     Does not mutate hand or wordList.
-   
+
     word: string
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    hand_copy = hand.copy()
+    word_freq = getFrequencyDict(word)
 
+    # for each character in the user's word, 
+    # compare the quantity of each character {key:value}
+    # to the value of the the character in the user's hand.
+    # Using get, so if the letter does not exist,
+    # use 0 as default value. 
+
+    for char in word:
+        if word_freq[char] > hand.get(char, 0):
+            print ("in word %s, %s does not exist enough times in hand: \n%s" %(word, char, hand))
+            return False
+
+    # If the function makes it this far, then evaluate
+    # if the word exists in the wordList       
+    return (word in wordList)
+
+
+w_list = loadWords()
+
+
+print (isValidWord("kwijibo", {'k': 1, 'j': 1, 'b': 1, 'w': 1, 'i': 2, 'o': 1}, w_list))
+print (isValidWord("chayote", {'c': 2, 'y': 1, 'h': 1, 't': 2, 'z': 1, 'u': 2, 'a': 1, 'o': 2}, w_list))
+print (isValidWord("hammer", {'r': 1, 'a': 1, 'e': 1, 'm': 2, 'h': 1}, w_list))
+print (isValidWord("hammer", {'r': 1, 'a': 1, 'e': 1, 'm': 2, 'h': 1}, w_list))
+print ( isValidWord("rapture", {'a': 3, 'r': 1, 't': 1, 'p': 2, 'e': 1, 'u': 1}, w_list))
+
+print (newline())
 
 #
 # Problem #4: Playing a hand
@@ -260,7 +265,15 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
+    length = 0
+    for value in hand.values():
+        length += value
+    return length
+
+
+hand = {'a': 1, 'q': 1, 'l': 2, 'm': 1, 'u': 1, 'i': 1}
+print (calculateHandlen(hand))
+
 
 
 
