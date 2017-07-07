@@ -336,7 +336,7 @@ def playHand(hand, wordList, n):
 
         # Otherwise (the input is not a single period):
         # If the word is not valid:
-        if isValidWord(user_input, hand, wordList) is False:
+        elif isValidWord(user_input, hand, wordList) is False:
             # Reject invalid word (print a message followed by a blank line)
             print ("Invalid word, please try again.\n")
 
@@ -356,10 +356,12 @@ def playHand(hand, wordList, n):
             # print (hand_length)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-    print ("Run out of letters. Total score: 46 points.")
+    return ("Goodbye! Total score: %s points." % total_score)
 
 
-hand = {'h': 1, 'i': 1, 'c': 1, 'z': 1, 'm': 2, 'a': 1}
+# hand = {'h': 1, 'i': 1, 'c': 1, 'z': 1, 'm': 2, 'a': 1}
+# hand = {'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}
+hand = {'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}
 n = 7
 print (playHand(hand, wordList, n))
 print (newline())
