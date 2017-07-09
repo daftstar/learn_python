@@ -354,19 +354,17 @@ def playHand(hand, wordList, n):
     return ("Goodbye! Total score: %s points." % total_score)
 
 
-hand = {'h': 1, 'i': 1, 'c': 1, 'z': 1, 'm': 2, 'a': 1}
+# hand = {'h': 1, 'i': 1, 'c': 1, 'z': 1, 'm': 2, 'a': 1}
 # hand = {'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}
 # hand = {'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}
-n = 7
-print (playHand(hand, wordList, n))
+# n = 7
+# print (playHand(hand, wordList, n))
 print (newline())
 
 
-
-
-#
 # Problem #5: Playing a game
-# 
+#
+
 
 def playGame(wordList):
     """
@@ -377,13 +375,45 @@ def playGame(wordList):
       * If the user inputs 'r', let the user play the last hand again.
       * If the user inputs 'e', exit the game.
       * If the user inputs anything else, tell them their input was invalid.
- 
-    2) When done playing the hand, repeat from step 1    
-    """
-    # TO DO ... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this line when you code the function
-   
 
+    2) When done playing the hand, repeat from step 1
+    """
+    # by running this function, we turn the game on
+    game_on = True
+
+    # when the game begins, initialize hand_played has not yet occured
+    hand_played = False
+
+    # while the game runs, execute the following:
+    while game_on is True:
+        # get user input for game options (n, r, e)
+        user_input = input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
+
+        # If the user gets cold feet, turn the game off and exit the game
+        if user_input == "e":
+            game_on = False
+            break
+
+        # If the user hits 'r' and the first hand hasn't played yet, show error
+        # <this seems sloppy, but it's part of the exercise>""
+        elif user_input == "r" and hand_played is False:
+            print ("You have not played a hand yet. Please play a new hand first!")
+
+        # if the user has already played a hand, then play again, but use the same hand
+        # hand has already been set by the next function, do not create a new hand
+        elif user_input == "r" and hand_played:
+            playHand(hand, wordList, HAND_SIZE)
+
+        # If the user wants a new game, create a new hand and start the game based
+        # on the newly created hand.
+        elif user_input == "n":
+            hand_played = True
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+
+        # otherwise, the user has fat-fingered the keys, so tell them they're invalid.
+        else:
+            print ("Invalid command.")
 
 
 #

@@ -78,13 +78,13 @@ def compPlayHand(hand, wordList, n):
             break
             
         # Otherwise (the input is not a single period):
-        else :
+        else:
             # If the word is not valid:
-            if (not isValidWord(word, hand, wordList)) :
+            if (not isValidWord(word, hand, wordList)):
                 print('This is a terrible error! I need to check my own code!')
                 break
             # Otherwise (the word is valid):
-            else :
+            else:
                 # Tell the user how many points the word earned, and the updated total score 
                 score = getWordScore(word, n)
                 totalScore += score
@@ -124,15 +124,81 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
 
-        
+    game_on = True
+
+    # when the game begins, initialize hand_played has not yet occured
+    hand_played = False
+
+        # while the game runs, execute the following:
+    while game_on is True:
+        # get user input for game options (n, r, e)
+        user_input = input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
+
+        # If the user gets cold feet, turn the game off and exit the game
+        if user_input == "e":
+            game_on = False
+            break
+
+        # If the user hits 'r' and the first hand hasn't played yet, show error
+        # <this seems sloppy, but it's part of the exercise>""
+        elif user_input == "r" and hand_played is False:
+            print ("You have not played a hand yet. Please play a new hand first!")
+
+        # If the user wants a new game, create a new hand and start the game based
+        # on the newly created hand.
+        elif user_input == "n":
+            hand_played = True
+            hand = dealHand(HAND_SIZE)
+
+            while game_on:
+                comp_or_user = input("Enter u to have yourself play, c to have the computer play: ")
+                if comp_or_user == "u":
+                    playHand(hand, wordList, HAND_SIZE)
+                    break
+
+                elif comp_or_user == "c":
+                    compPlayHand(hand, wordList, HAND_SIZE)
+                    break
+
+                else:
+                    print ("Invalid command.")
+
+        # if the user has already played a hand, then play again, but use the same hand
+        # hand has already been set by the next function, do not create a new hand
+        elif user_input == "r" and hand_played:
+
+            while game_on:
+                comp_or_user = input("Enter u to have yourself play, c to have the computer play: ")
+                if comp_or_user == "u":
+                    playHand(hand, wordList, HAND_SIZE)
+                    break
+
+                elif comp_or_user == "c":
+                    compPlayHand(hand, wordList, HAND_SIZE)
+                    break
+
+                else:
+                    print ("Invalid command.")
+
+        # otherwise, the user has fat-fingered the keys, so tell them they've messed up.
+        else:
+            print ("Invalid command.")
+
+
+# compPlayHand({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 6)
+# compPlayHand({'a': 2, 'c': 1, 'b': 1, 't': 1}, wordList, 5)
+
+
+
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     wordList = loadWords()
+
+    # speeds up game by turning wordList into set vs. ordered List.
+    wordList = set(wordList)
     playGame(wordList)
 
 
