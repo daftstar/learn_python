@@ -243,7 +243,8 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass   # delete this line and replace with your code here
+        # self.message_text and self.valid_words initialized by Message parent class
+        Message.__init__(self, text)   # initialize Message attributes
 
     def decrypt_message(self):
         '''
@@ -261,28 +262,67 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass   # delete this line and replace with your code here
+        # print ("_________")
+        # debug to get the actual message test - see if func is firing..
+        # print (self.get_message_text())
+        # print ("_________")
+
+        # instantiate tuple
+        best = ()
+
+        # instantiate comparison variable
+        highest_word_count = 0
+
+        # for each shift value available in the number of letters
+        # in the alphabet (26), decipher the string using each shift value.
+        # Split the deciphered string into individual words, and put into list
+        # word_list
+
+        # for each word in the word list, check if the word is
+        # a valid word. If it is, increment the valid_word_count by 1
+
+        # kepp track of the highest word count against the current valid
+        # word count. If the current valid_word_count is higher, then
+        # update the tuple with the current shift and the decrypted string
+        for i in range(26):
+            valid_word_count = 0
+            decrypted_string = self.apply_shift(i)
+            # print (decrypted_string)
+            word_list = decrypted_string.split(' ')
+
+            for word in word_list:
+                if is_word(self.valid_words, word):
+                    valid_word_count += 1
+
+            if valid_word_count > highest_word_count:
+                highest_word_count = valid_word_count
+                best = (i, decrypted_string)
+
+        return best
+         
 
 
 
-a = Message("hello world")
-print (a.get_message_text())
-print (a.build_shift_dict(1))
-print (a.apply_shift(2))
-
-# ptext = PlaintextMessage("hello", 3)
-# # print (ptext.valid_words)
 
 
 
+
+
+# a = Message("hello world")
+# print (a.get_message_text())
+# print (a.build_shift_dict(1))
+# print (a.apply_shift(2))
+# print ()
+# print ()
 
 
 # Example test case (PlaintextMessage)
-plaintext = PlaintextMessage('hello', 2)
-print('Expected Output: jgnnq')
-print('Actual Output:', plaintext.get_message_text_encrypted())
+# plaintext = PlaintextMessage('hello', 2)
+# print('Expected Output: jgnnq')
+# print('Actual Output:', plaintext.get_message_text_encrypted())
+
 
 # # Example test case (CiphertextMessage)
-# ciphertext = CiphertextMessage('jgnnq')
-# print('Expected Output:', (24, 'hello'))
-# print('Actual Output:', ciphertext.decrypt_message())
+ciphertext = CiphertextMessage('jgnnq jgnnq jgnnq')
+print('Expected Output:', (24, 'hello hello hello'))
+print('Actual Output:', ciphertext.decrypt_message())
