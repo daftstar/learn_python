@@ -299,14 +299,21 @@ class CiphertextMessage(Message):
                 best = (i, decrypted_string)
 
         return best
-         
 
 
+# PROBLEM 4
+# Create a CiphertextMessage object using the story string
+# and use decrypt_message to return the appropriate shift value
+# and unencrypted story string.
+
+def decrypt_story():
+    story = get_story_string()
+
+    decrypted_story = CiphertextMessage(story)
+    return (decrypted_story.decrypt_message())
 
 
-
-
-
+print (decrypt_story())
 
 # a = Message("hello world")
 # print (a.get_message_text())
@@ -323,6 +330,6 @@ class CiphertextMessage(Message):
 
 
 # # Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('jgnnq jgnnq jgnnq')
-print('Expected Output:', (24, 'hello hello hello'))
-print('Actual Output:', ciphertext.decrypt_message())
+# ciphertext = CiphertextMessage('jgnnq jgnnq jgnnq')
+# print('Expected Output:', (24, 'hello hello hello'))
+# print('Actual Output:', ciphertext.decrypt_message())
