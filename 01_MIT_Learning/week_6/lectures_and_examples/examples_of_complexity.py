@@ -15,7 +15,7 @@ def intToStr(i):
     return result
 
 
-print (intToStr(987650))
+# print (intToStr(987650))
 # question is how many times do we have to divide by 10?
 # linear in the digits of n, but log in the size of n.
 
@@ -29,7 +29,7 @@ def addDigits(s):
     return val
 
 
-print (addDigits("123493"))
+# print (addDigits("123493"))
 
 
 def fact_iter(n):
@@ -39,7 +39,7 @@ def fact_iter(n):
     return prod
 
 
-print (fact_iter(1))
+# print (fact_iter(1))
 
 
 # the recursive function is still O(n) because function calls
@@ -54,7 +54,7 @@ def fact_recur(n):
         return n * (fact_recur(n-1))
 
 
-print (fact_recur(3))
+# print (fact_recur(3))
 
 
 # --------------------------------------------------------------
@@ -73,8 +73,8 @@ def genSubsets(L):
 
 L = [1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 # L = [1, 2]
-hey = genSubsets(L)
-print (len(hey))
+# hey = genSubsets(L)
+# print (len(hey))
 
 
 
@@ -101,6 +101,66 @@ print (len(hey))
 #   2^n + n^2
 
 
+def search(L, e):
+    for i in range(len(L)):
+        if L[i] == e:
+            return True
+        if L[i] > e:
+            return False
+    return False
+
+def newsearch(L, e):
+    size = len(L)
+    for i in range(size):
+        if L[size-i-1] == e:
+            return True
+        if L[i] < e:
+            return False
+    return False
+
+# L = [0, 1, 2, 3, 4, 5, 6, 77, 99, 132, 154, 178]
+# L = [2, 3, 6]
+# L = [5, 10, 15, 20, 40, 80, 99]
+# L = [1, 2, 5]
+L = [1, 5, 999999]
+
+# print (search(L, 5))
+# print (newsearch(L, 5))
 
 
+def swapSort(L): 
+    """ L is a list on integers """
+    print("Original L: ", L)
+    for i in range(len(L)):
+        for j in range(i+1, len(L)):
+            if L[j] < L[i]:
+                # the next line is a short 
+                # form for swap L[i] and L[j]
+                L[j], L[i] = L[i], L[j] 
+                print(L)
+    print("Final L: ", L)
+
+L = [2200, 13, 2, 3, 4, 99, 6, 77]
+# print (swapSort(L))
+print ()
+
+
+
+def modSwapSort(L): 
+    """ L is a list on integers """
+    print("Original L: ", L)
+    for i in range(len(L)):
+        for j in range(len(L)):
+            if L[j] < L[i]:
+                # the next line is a short 
+                # form for swap L[i] and L[j]
+                L[j], L[i] = L[i], L[j] 
+                print(L)
+    print("Final L: ", L)
+
+L = [14, 2200, 13, 2, 3, 4, 99, 6, 77]
+L = [20083, 2200, 13, 2, 3, 4, 99, 6, 77, 10200202]
+L = [1, 2, 3, 4, 5, 6]
+L = [1, 7, 2, 4, 6, 5]
+print (modSwapSort(L))
 
