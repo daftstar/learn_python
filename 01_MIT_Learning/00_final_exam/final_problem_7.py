@@ -145,4 +145,3 @@ Then the following commands:
 
     c.get_tents() should return:
     ['<0,0>', '<1,2>', '<2,3>']"""
-
