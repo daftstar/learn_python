@@ -2,7 +2,7 @@ import random
 random.seed(a=11, version=2)
 
 # create new list
-L = [random.randint(1, 1400) for i in range(1000)]
+L = [random.randint(1, 15) for i in range(15)]
 
 # create sorted version of L
 SL = L.copy()
@@ -24,8 +24,8 @@ def linear_search(L, e):
     return found
 
 
-print (linear_search(L, 1))
-print ()
+# print (linear_search(L, 1))
+# print ()
 
 # must look through all elements to decide it’s not there
 # O(len(L)) for the loop * O(1) to test if e == L[i]
@@ -46,9 +46,9 @@ def search(SORTED, e):
             return False
 
 
-print (search(SORTED, 129))
-print (search(SORTED, 402))
-print()
+# print (search(SORTED, 129))
+# print (search(SORTED, 402))
+# print()
 
 # Overall complexity is still O(n), where n is len(L) -
 #   worst case scenario is that e is not found in list,
@@ -78,7 +78,10 @@ def bisect_search(SORTED, e):
             return bisect_search(SORTED[half:], e)              # O(log n), where n is len(SORTED) - this creates copies of the list, which dramatically adds complexity
 
 
-print (bisect_search(SORTED, 21093))
+print (bisect_search(SORTED, 9))
+# print (L)
+print (SORTED)
+# print (SORTED[-1] < 7)
 
 
 # ALTERNATE VERSION OF BISECTION SEARCH
@@ -104,7 +107,7 @@ def bisect_search2(SORTED, e):
         return bisect_search_helper(SORTED, e, 0, len(SORTED) - 1)
 
 # print (SORTED)
-print (bisect_search2(SORTED, 1390))
+# print (bisect_search2(SORTED, 1390))
 
 # complexity of both is still O(log n)
 # in bisect2, pass list and indices as parameters
