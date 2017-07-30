@@ -101,16 +101,14 @@ class MITCampus(Campus):
         return sorted(tents)
 
 
-# d = MITCampus(Location(1, 2))
-# print (d.get_tents())
+d = MITCampus(Location(1, 2))
 
-
-# print (d.add_tent(Location(2, 3)))
-# print (d.add_tent(Location(1, 2)))
-# print (d.add_tent(Location(0, 0)))
-# print (d.add_tent(Location(2, 3)))
-# print (d.get_tents())
-print ("--------")
+print (d.add_tent(Location(2, 3)))
+print (d.add_tent(Location(1, 2)))
+print (d.add_tent(Location(0, 0)))
+print (d.add_tent(Location(2, 3)))
+print (d.get_tents())
+# print ("--------")
 
 #               center loc     tent loc, otherwise default(0,0)
 # c = MITCampus(Location(1,2), Location(3,1))
@@ -122,9 +120,9 @@ print ("--------")
 # # print(c.add_tent(Location(2.49, 1)))
 # print(c.add_tent(Location(2.51,1)))
 
-print ("--------------")
+# print ("--------------")
 #               center loc   tent loc, otherwise default(0,0)=
-c = MITCampus(Location(1,2), Location(3,1))
+# c = MITCampus(Location(1,2), Location(3,1))
 
 # c.add_tent(Location(1,1))
 # print (c.add_tent(Location(1,1)))
@@ -132,8 +130,8 @@ c = MITCampus(Location(1,2), Location(3,1))
 # c.add_tent(Location(1,1))
 # print(c.add_tent(Location(1.49,1)))
 
-c.add_tent(Location(1,1))
-print(c.add_tent(Location(1.51,1)))
+# c.add_tent(Location(1,1))
+# print(c.add_tent(Location(1.51,1)))
 
 """
 For example if,
@@ -148,75 +146,3 @@ Then the following commands:
     c.get_tents() should return:
     ['<0,0>', '<1,2>', '<2,3>']"""
 
-
-
-# class MITCampus(Campus):
-
-#     """ A MITCampus is a Campus that contains tents """
-#     def __init__(self, center_loc, tent_loc=Location(0, 0)):
-#         """ Assumes center_loc and tent_loc are
-#         Location objects.
-
-#         Initializes a new Campus centered at
-#         location center_loc with a tent at location tent_loc """
-#         # Initialize Campus class with center_loc
-#         Campus.__init__(self, center_loc)
-
-#         # create new list beginning with current tent_loc
-#         self.tent_loc = [tent_loc]
-
-#     def add_tent(self, new_tent_loc):
-#         """ Assumes new_tent_loc is a Location
-#         Adds new_tent_loc to the campus only if the tent is
-#         at least 0.5 distance away from all other tents
-#         already there. Campus is unchanged otherwise.
-
-#         Returns True if it could add the tent,
-#         False otherwise. """
-#         for i in self.tent_loc:
-#             if new_tent_loc.dist_from(i) <= 0.5:
-#                 return False
-
-#         self.tent_loc.append(new_tent_loc)
-#         return True
-
-
-#         # for i in self.tent_loc:
-#         #     if new_tent_loc.dist_from(i) >= 0.5:
-#         #         self.tent_loc.append(new_tent_loc)
-#         #         print (new_tent_loc, i, new_tent_loc.dist_from(i))
-#         #         return True
-#         #     else:
-#         #         return False
-
-#         # for i in self.tent_loc:
-#         #     if i.dist_from(new_tent_loc) >= 0.5:
-#         #         self.tent_loc.append(new_tent_loc)
-#         #         print (i, new_tent_loc, i.dist_from(new_tent_loc))
-#         #         return True
-#         #     else:
-#         #         print (i, new_tent_loc, i.dist_from(new_tent_loc))
-#         #         return False
-
-
-#     def remove_tent(self, tent_loc):
-#         """ Assumes tent_loc is a Location
-#         Removes tent_loc from the campus.
-#         Raises a ValueError if there is not a tent at tent_loc.
-#         Does not return anything """
-#         # Your code here
-#         pass
-
-#     def get_tents(self):
-#         """ Returns a list of all tents on the campus.
-#         The list should contain the string representation of
-#         the Location of a tent.
-
-#         The list should be sorted by the
-#         x coordinate of the location. """
-#         # Your code here
-#         tents = []
-#         for i in self.tent_loc:
-#             tents.append(i.__str__())
-
-#         return sorted(tents)
