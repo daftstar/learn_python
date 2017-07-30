@@ -62,14 +62,12 @@ class MITCampus(Campus):
         for i in self.tent_loc:
             # if new_tent_loc.dist_from(i) <= 0.5:
             if new_tent_loc.dist_from(i) <= 0.4999:     # USING THIS DUE TO MIT TEST HARNESS ROUNDING ERRORS
-                print (new_tent_loc.dist_from(i))
+                # print (new_tent_loc.dist_from(i))
                 return False
 
         # print (new_tent_loc.dist_from(i))
         self.tent_loc.append(new_tent_loc)
         return True
-
-
 
     def remove_tent(self, tent_loc):
         """ Assumes tent_loc is a Location
