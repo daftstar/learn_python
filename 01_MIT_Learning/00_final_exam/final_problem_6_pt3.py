@@ -165,55 +165,91 @@ PRINTS:
 # Do not override any methods of Container.
 
 class ASet(Container):
+    unmodified = {}
+
     def remove(self, e):
         """assumes e is hashable
            removes e from self"""
-        # write code here
-        if e in self.vals:
-            self.vals[e] -= 1
-        else:
+        # unmodified = True
+        # prevents removal when value is at 0
+        if e in self.vals and self.vals[e] < 1:
             pass
 
+        # Upon modification, set the class variable
+        # unmodified[e] to False
+        elif e in self.vals:
+            self.vals[e] -= 1
+            ASet.unmodified[e] = False
+
+        # if above two conditions have not been net,
+        # e does not exist in vals
+        else:
+            pass
 
     def is_in(self, e):
         """assumes e is hashable
            returns True if e has been inserted in self and
            not subsequently removed, and False otherwise."""
         
-        # print (self.vals)
-
-        # return (self.vals[e]) == 0
+        # if the count of e is at 0, it doesn't technically exist
         if self.vals[e] == 0:
             return False
-        elif e in self.vals:
+        
+        # check that e is in the dictionary, but doesn't
+        # have a modification value (neither true / false)
+        elif e in self.vals and e not in ASet.unmodified:
             return True
         else:
             return False
 
 
-
-
-
-
-
+# TEST 1:   SHOULD RESULT TRUE
 d1 = ASet()
 d1.insert(4)
 print(d1.is_in(4))
+
+
+
+# TEST 2:   SHOULD RESULT TRUE           
+d1 = ASet()
+d1.insert(4)
 d1.insert(5)
+d1.remove(4)
 print(d1.is_in(5))
-d1.remove(5)
-print(d1.is_in(5))
 
 
-# d1 = ASet()
-# d1.insert(4)
-# d1.insert(4)
+# TEST 3:   SHOULD RESULT FALSE
+d1 = ASet()
+d1.insert(4)
+d1.insert(4)
+d1.insert(4)
+d1.remove(4)
+print(d1.is_in(4))
 
-# d1.remove(2)
-# print(d1)
 
-# d1.remove(4)
-# print(d1)
+# TEST4:    SHOULD RESULT NULL - NO OUTPUT
+d1 = ASet()
+d1.insert(4)
+d1.remove(4)
+print(d1)
+
+
+# TEST 5:   SHOULD RESULT 4:2
+d1 = ASet()
+d1.insert(4)
+d1.insert(4)
+d1.remove(2)
+print(d1)
+
+
+# TEST 6:   SHOULD RESULT NULL - NO OUTPUT
+d1 = ASet()
+d1.insert(4)
+d1.remove(4)
+d1.remove(4)
+d1.remove(4)
+print(d1)
+
 
 """
 FOR EXAMPLE(ASET REMOVE):
@@ -233,7 +269,3 @@ PRINTS:
         # (empty) from d1.remove(4) print
 
 """
-
-
-
-
