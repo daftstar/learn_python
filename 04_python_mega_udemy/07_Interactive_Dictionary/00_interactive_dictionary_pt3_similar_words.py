@@ -8,6 +8,8 @@ def get_definition():
     asks users for a word, returns value (or guessed value if word
     isn't found.)
     """
+    # This is ineffiecient, as we're loading the entire datafile
+    # into memory. TODO: Use database insted of entire file load ;)
     data_dict = json.load(open("data_files/data.json"))
 
     word = input("what would you like to lookup? ").lower()
