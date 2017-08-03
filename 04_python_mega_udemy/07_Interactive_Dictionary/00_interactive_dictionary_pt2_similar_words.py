@@ -15,6 +15,7 @@ def get_definition():
     # word = "rainn"
     # word = "kjsdjkhsdkfljsdkl"
 
+    # TO DO - clean up redundant code!
     if word in data_dict:
         answer = data_dict[word]
 
