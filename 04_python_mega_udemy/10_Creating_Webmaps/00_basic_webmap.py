@@ -28,13 +28,37 @@ map = folium.Map(
                 zoom_start=6,
                 tiles="Mapbox Bright")
 
-map.save("Map1.html")
+fg = folium.FeatureGroup(name="Nik's Map")
 
 # Add point markers
-map.add_child(folium.Marker(
+fg.add_child(folium.Marker(
                 location=[38.2, -99.1],
                 popup="Here I am!",
-                icon=folium.Icon(color="green")))
+                icon=folium.Icon(color="blue")))
+
+fg.add_child(folium.Marker(
+                location=[38.9, -98.5],
+                popup="Here I am!",
+                icon=folium.Icon(color="red")))
 
 
+map.add_child(fg)
 map.save("Map1.html")
+
+
+
+# Adding multiple locations
+
+locations = [[39.9, -98.5], [38.9, -98.1], [38.52, -99.46]]
+
+
+def add_lots(locations):
+    for loc in locations:
+        fg.add_child(folium.Marker(
+            location=loc,
+            popup="I'm a marker",
+            icon=folium.Icon(color="blue")))
+        map.add_child(fg)
+    map.save("Map1.html")
+
+add_lots(locations)
