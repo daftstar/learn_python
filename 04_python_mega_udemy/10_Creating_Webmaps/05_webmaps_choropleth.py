@@ -12,7 +12,10 @@ import pandas as pd
 # '__loader__', '__name__', '__package__', '__path__', '__spec__',
 # '__version__', 'absolute_import', 'features', 'folium', 'map']
 
+# geo_k_data contains polygon info for all countries
+geo_j_data = open("data/world.json", "r", encoding="utf-8-sig")
 data = pd.read_csv("data/Volcanoes.txt")
+
 
 LAT = list(data["LAT"])
 LON = list(data["LON"])
@@ -25,11 +28,20 @@ center = [mean(LAT), mean(LON)]
 
 fg = folium.FeatureGroup(name="Nik's Map")
 mymap = folium.Map(location=center,
-                   tiles="Stamen Terrain",
+                   # tiles="Stamen Terrain",
+                   tiles="Mapbox Bright",
                    zoom_start=5)
 
 
-def add_lots(locations):
+fg.add_child(folium.GeoJson(
+             geo_j_data,
+             style_function=lambda x: {
+                'fillColor': 'white' if x['properties']['POP2005'] < 1000000
+                else 'blue' if 10000000 <= x['properties']['POP2005'] < 20000000
+                else 'black'}))
+
+
+def add_volcano_markers(locations):
     """
     Requires COORD variable:
              COORD = 3 integer values, lat, lon, elevation
@@ -59,9 +71,7 @@ def add_lots(locations):
             weight=1.0,
             fill_opacity=0.7))
     mymap.add_child(fg)
-    mymap.save("Map5.html")
+    mymap.save("Map7.html")
 
 
-add_lots(COORD)
-
-# n
+add_volcano_markers(COORD)
